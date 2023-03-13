@@ -27,7 +27,10 @@ public class SecurityConfig {
 		
 		http.csrf().disable();
 		http.logout().deleteCookies("JSESSIONID");
-		http.formLogin().loginPage("/signin").loginProcessingUrl("/signin").defaultSuccessUrl("/main");
+		http.formLogin()
+			.loginPage("/signin")
+			.loginProcessingUrl("/signin")
+			.defaultSuccessUrl("/main");
 		
 		return http.build();
 	}
