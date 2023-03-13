@@ -1,5 +1,6 @@
 package com.shop.entity;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -20,6 +21,7 @@ public class Item {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long iNumber;
+	@Column(nullable = false, length = 100)
 	private String iName;
 	
 	private String iCategory;

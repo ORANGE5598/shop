@@ -25,6 +25,7 @@ import javax.persistence.MappedSuperclass;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import lombok.Getter;
 
@@ -37,6 +38,7 @@ abstract class BaseEntity {
 	// 속성을 이용해서 자동으로 값을 업데이트 할 지 여부를 조정할 수 있음.
 	@CreatedDate
 	@Column(name = "regDate", updatable = false)
+	@DateTimeFormat(pattern = "yyyy-MM-dd hh:mm:ss")
 	private LocalDateTime regDate;
 	
 	// 위의 컬럼은 방명록 작성시간을 나타내는 컬럼이고 
@@ -44,8 +46,7 @@ abstract class BaseEntity {
 	// 수정시간을 자동으로 생성해주는 어노테이션도 있음.
 	@LastModifiedDate
 	@Column(name = "modDate")
+	@DateTimeFormat(pattern = "yyyy-MM-dd hh:mm:ss")
 	private LocalDateTime modDate;
-	
-	
 	
 }

@@ -1,7 +1,5 @@
 package com.shop.entity;
 
-import java.time.LocalDateTime;
-
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -9,26 +7,29 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
 @Builder
 @Getter
 @Setter
-public class Order extends BaseEntity {
+@AllArgsConstructor
+@NoArgsConstructor
+public class OrderHistory extends BaseEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long oNumber;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-	private Member oMember;
-	@ManyToOne(fetch = FetchType.LAZY)
-	private String oItemName;
+	private Member member;
 	
-	private String oItemInfo;
-	private Long oItemPrice;
+	@ManyToOne(fetch = FetchType.LAZY)
+	private Item item;
+	
 	
 }
