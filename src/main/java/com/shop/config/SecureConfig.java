@@ -7,11 +7,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
-import lombok.extern.log4j.Log4j2;
-
-@Log4j2
 @Configuration
-public class SecurityConfig {
+public class SecureConfig {
 
 	@Bean
 	PasswordEncoder passwordEncoder() {
@@ -20,18 +17,19 @@ public class SecurityConfig {
 	
 	@Bean
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+		http.csrf().disable();
+		
 		http.authorizeHttpRequests((auth) -> {
-			auth.antMatchers("/").permitAll();
+			auth.antMatchers("/index").permitAll();
 			auth.antMatchers("/mypage/**", "/edit/**", "/cart/**", "/orders/**").authenticated();
-			auth.antMatchers("/admin/**").hasAnyRole("ADMIN");
 		});
 		
-		http.csrf().disable();
-		http.logout().deleteCookies("JSESSIONID");
 		http.formLogin()
 			.loginPage("/signin")
 			.loginProcessingUrl("/signin")
 			.defaultSuccessUrl("/");
+		
+		http.logout().deleteCookies("JSESSIONID");
 		
 		return http.build();
 	}

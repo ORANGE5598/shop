@@ -8,22 +8,19 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import com.shop.entity.Member;
 
-import lombok.Data;
+public class PrincipalDetails implements UserDetails {
 
-@Data
-public class PrincipalDetails implements UserDetails{
-	
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 5572819756500788475L;
+	private static final long serialVersionUID = -6975922358766319314L;
 	
 	private Member member;
 	
 	public PrincipalDetails(Member member) {
 		this.member = member;
 	}
-
+	
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		Collection<GrantedAuthority> collector = new ArrayList<>();
@@ -40,32 +37,28 @@ public class PrincipalDetails implements UserDetails{
 
 	@Override
 	public String getUsername() {
-		// TODO Auto-generated method stub
-		return member.getName();
+		return member.getId();
 	}
 
 	@Override
 	public boolean isAccountNonExpired() {
-		// TODO Auto-generated method stub
 		return true;
 	}
 
 	@Override
 	public boolean isAccountNonLocked() {
-		// TODO Auto-generated method stub
 		return true;
 	}
 
 	@Override
 	public boolean isCredentialsNonExpired() {
-		// TODO Auto-generated method stub
 		return true;
 	}
 
 	@Override
 	public boolean isEnabled() {
-		// TODO Auto-generated method stub
 		return true;
 	}
+	
 
 }

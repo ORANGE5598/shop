@@ -1,19 +1,19 @@
 package com.shop.repository;
 
+import com.shop.entity.Member;
+
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-import com.shop.entity.Member;
 
-public interface MemberRepository extends JpaRepository<Member, String> {
 
-	Member findByEmail(String email);
-	Member findByUsername(String name);
+public interface MemberRepository extends JpaRepository<Member, String>{
 	
-	@Query("SELECT m FROM Member m WHERE m.id =:id")
-	Optional<Member> findById(@Param("id") String email);
-	
+	@Query("SELECT m FROM Member m WHERE m.email =:email AND m.id =:id")
+	Optional<Member> findByEmailAndId(@Param("email") String email, @Param("id") String id);
+
+	Optional<Member> findById(String Id);
 }

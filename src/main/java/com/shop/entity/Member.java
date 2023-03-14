@@ -5,28 +5,25 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.UniqueConstraint;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.Setter;
 
 @Entity
 @Builder
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
-public class Member extends BaseEntity {
-	
-//	@Id
-//	@GeneratedValue(strategy = GenerationType.IDENTITY)
-//	private int user_num;		// 유저 번호 부여. (PK)
+public class Member extends BaseEntity{
 	
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long member_num;		// 유저 번호 부여. (PK)
+	
 	@Column(nullable = false, unique = true)
 	private String id;			// 로그인ID. (unique)
 	
@@ -44,7 +41,7 @@ public class Member extends BaseEntity {
 	@Column(nullable = false)
 	private String phoneNumber;	// 휴대폰 번호.
 	
-	private String role;		// 권한.
+	private String role;
 	
 	private Long point;
 }
