@@ -11,6 +11,7 @@ import com.shop.entity.Member;
 public interface MemberRepository extends JpaRepository<Member, String> {
 
 	Member findByEmail(String email);
+	Member findByUsername(String name);
 	
 	@Query("SELECT m FROM Member m WHERE m.id =:id")
 	Optional<Member> findById(@Param("id") String email);

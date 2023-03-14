@@ -21,8 +21,9 @@ public class SecurityConfig {
 	@Bean
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 		http.authorizeHttpRequests((auth) -> {
-			auth.antMatchers("/main").permitAll();
-			auth.antMatchers("/main/admin").hasAnyRole("ADMIN");
+			auth.antMatchers("/").permitAll();
+			auth.antMatchers("/mypage/**", "/edit/**", "/cart/**", "/orders/**").authenticated();
+			auth.antMatchers("/admin/**").hasAnyRole("ADMIN");
 		});
 		
 		http.csrf().disable();
@@ -30,7 +31,7 @@ public class SecurityConfig {
 		http.formLogin()
 			.loginPage("/signin")
 			.loginProcessingUrl("/signin")
-			.defaultSuccessUrl("/main");
+			.defaultSuccessUrl("/");
 		
 		return http.build();
 	}
