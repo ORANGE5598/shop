@@ -10,7 +10,7 @@ import org.springframework.data.repository.query.Param;
 
 
 
-public interface MemberRepository extends JpaRepository<Member, String>{
+public interface MemberRepository extends JpaRepository<Member, Long>{
 	
 	@Query("SELECT m FROM Member m WHERE m.email =:email AND m.id =:id")
 	Optional<Member> findByEmailAndId(@Param("email") String email, @Param("id") String id);

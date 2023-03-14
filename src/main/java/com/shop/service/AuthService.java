@@ -26,8 +26,16 @@ public class AuthService {
 	public Member signup(Member member) {
 		String originPassword = member.getPassword();
 		String encordPassword = passwordEncoder.encode(originPassword);
+		
+		member.setId(member.getId());
 		member.setPassword(encordPassword);
+		member.setName(member.getName());
+		member.setEmail(member.getEmail());
+		member.setAddress(member.getAddress());
+		member.setPhoneNumber(member.getPhoneNumber());
+		
 		member.setRole(MemberRole.MEMBER);
+		member.setPoint(0L);
 		
 		Member memberEntity = memberRepository.save(member);
 		return memberEntity;
